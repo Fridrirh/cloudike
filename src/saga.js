@@ -85,7 +85,7 @@ function* externalListener(socketChannel) {
   }
 }
 
-function* connectWs(action) {
+function* connectWs() {
   try {
     const token = localStorage.getItem("x-test-app-jwt-token");
     if (token) {

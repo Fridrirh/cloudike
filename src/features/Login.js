@@ -87,6 +87,19 @@ const Row = styled.div`
     font-size: 16px;
     margin-right: 8px;
   }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    p {
+      margin-bottom: 8px;
+    }
+
+    & > div {
+      width: 100%;
+    }
+  }
 `;
 
 const Controls = styled.div`
