@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Switch, Route } from "react-router-dom";
+import { push } from "connected-react-router";
+
+import { Container, GlobalStyles } from "./styles";
+import { Login, Display } from "./features";
+import { FlashMsg } from "./components";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem("x-test-app-jwt-token")) {
+      dispatch(push("/display"));
+    } else {
+      dispatch(push("/"));
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <FlashMsg />
+      <Container>
+        <Switch>
+          <Route path="/display" component={Display} />
+          <Route path="/" component={Login} />
+        </Switch>
+      </Container>
+    </>
   );
 }
 
